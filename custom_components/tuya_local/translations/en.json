@@ -667,7 +667,9 @@
                     "infant_formula": "Infant formula",
                     "white_tea": "White tea",
                     "oolong_tea": "Oolong tea",
-                    "water": "Water"
+                    "water": "Water",
+                    "herbal_tea": "Herbal tea",
+                    "pu_erh": "Pu-erh"
                 }
             },
             "language": {

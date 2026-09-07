@@ -529,7 +529,9 @@
                     "oolong_tea": "mdi:tea",
                     "coffee": "mdi:coffee",
                     "infant_formula": "mdi:baby-bottle",
-                    "water": "mdi:water"
+                    "water": "mdi:water",
+                    "herbal_tea": "mdi:tea",
+                    "pu_erh": "mdi:tea"
                 }
             },
             "light_mode": {
