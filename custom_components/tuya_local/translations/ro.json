@@ -667,6 +667,8 @@
                     "infant_formula": "Formula sugari",
                     "white_tea": "Ceai alb",
                     "oolong_tea": "Ceai oolong",
+                    "herbal_tea": "Ceai de plante",
+                    "pu_er_tea": "Ceai pu'er",
                     "water": "Apă"
                 }
             },

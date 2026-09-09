@@ -527,6 +527,8 @@
                     "green_tea": "mdi:tea",
                     "white_tea": "mdi:tea",
                     "oolong_tea": "mdi:tea",
+                    "herbal_tea": "mdi:tea",
+                    "pu_er_tea": "mdi:tea",
                     "coffee": "mdi:coffee",
                     "infant_formula": "mdi:baby-bottle",
                     "water": "mdi:water"

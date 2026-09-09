@@ -667,6 +667,8 @@
                     "infant_formula": "Lait infantile",
                     "white_tea": "Thé blanc",
                     "oolong_tea": "Thé Oolong",
+                    "herbal_tea": "Tisane",
+                    "pu_er_tea": "Thé Pu'er",
                     "water": "Eau"
                 }
             },
