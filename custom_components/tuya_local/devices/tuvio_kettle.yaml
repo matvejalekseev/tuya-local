@@ -1,0 +1,175 @@
+name: Kettle
+products:
+  - id: ggcjxa4ywouub0ji
+    manufacturer: Tuvio
+    model: TKP1317S/TKP1417S/TKP1517S/TKP1617S/TKP1717S
+entities:
+  - entity: water_heater
+    translation_key: kettle
+    dps:
+      - id: 1
+        type: boolean
+        name: operation_mode
+        mapping:
+          - dps_val: false
+            value: "off"
+          - dps_val: true
+            value: electric
+      - id: 2
+        type: integer
+        name: current_temperature
+        unit: C
+      - id: 4
+        type: integer
+        name: temperature
+        unit: C
+        range:
+          min: 0
+          max: 100
+  - entity: sensor
+    translation_key: status
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 8
+        type: string
+        name: sensor
+        mapping:
+          - dps_val: standby
+            value: standby
+          - dps_val: heating
+            value: heating
+          - dps_val: cooling
+            value: cooling
+          - dps_val: warm
+            value: keeping_warm
+      # dp 9 is set automatically by the device alongside the kettle_mode
+      # preset (dp 11): boiling_quick for presets that boil to 100C first and
+      # cool down before settling (Boiled, Black_tea, Pu_erh), heating_quick
+      # for the rest. It is not independently controllable, so it is exposed
+      # here as a read-only attribute rather than its own select, the same
+      # approach used for this dp in gotzejensen_kt975k_kettle.yaml.
+      - id: 9
+        type: string
+        name: heating_method
+        mapping:
+          - dps_val: boiling_quick
+            value: quick_boil
+          - dps_val: heating_quick
+            value: quick_heat
+  - entity: binary_sensor
+    class: problem
+    category: diagnostic
+    dps:
+      - id: 10
+        type: bitfield
+        name: sensor
+        mapping:
+          - dps_val: 0
+            value: false
+          - value: true
+      - id: 10
+        type: bitfield
+        name: fault_code
+      - id: 10
+        type: bitfield
+        name: description
+        mapping:
+          - dps_val: 0
+            value: ok
+          - dps_val: 1
+            value: boiled_dry
+          - dps_val: 2
+            value: low_water
+          - dps_val: 4
+            value: sensor_fault
+  # The preset is the main control for this kettle: selecting one
+  # automatically sets the target temperature (dp 4), heating method (dp 9)
+  # and keep warm (dp 14). All 10 values were read directly off the device.
+  - entity: select
+    translation_key: kettle_mode
+    dps:
+      - id: 11
+        type: string
+        name: option
+        mapping:
+          - dps_val: Boiled
+            value: boil
+          - dps_val: diy
+            value: custom
+          - dps_val: Baby_food
+            value: infant_formula
+          - dps_val: White_tea
+            value: white_tea
+          - dps_val: Green_tea
+            value: green_tea
+          - dps_val: Oolong
+            value: oolong_tea
+          - dps_val: Herbal_tea
+            value: herbal_tea
+          - dps_val: Drip_coffee
+            value: coffee
+          - dps_val: Black_tea
+            value: black_tea
+          - dps_val: Pu_erh
+            value: pu_er_tea
+  - entity: switch
+    name: Keep warm
+    icon: "mdi:kettle-outline"
+    dps:
+      - id: 14
+        type: boolean
+        name: switch
+  - entity: switch
+    translation_key: sound
+    category: config
+    dps:
+      - id: 103
+        type: boolean
+        name: switch
+        optional: true
+        mapping:
+          - dps_val: true
+            value: false
+          - dps_val: false
+            value: true
+  - entity: sensor
+    class: volume_storage
+    translation_key: water_level
+    dps:
+      - id: 101
+        type: integer
+        name: sensor
+        optional: true
+        unit: mL
+        class: measurement
+  - entity: sensor
+    name: Cups
+    icon: "mdi:cup-outline"
+    dps:
+      - id: 102
+        type: integer
+        name: sensor
+        optional: true
+        class: measurement
+  - entity: number
+    translation_key: timer
+    class: duration
+    category: config
+    dps:
+      - id: 12
+        type: integer
+        name: value
+        unit: min
+        range:
+          min: 0
+          max: 720
+  - entity: sensor
+    translation_key: time_remaining
+    class: duration
+    category: diagnostic
+    dps:
+      - id: 13
+        type: integer
+        name: sensor
+        unit: min
